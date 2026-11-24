@@ -12,3 +12,15 @@ Data quality checks: invalid records are routed to a quarantine table with rejec
 Idempotent, fault-tolerant runs: rerunning a failed job does not create duplicates or lose data.
 Pipeline monitoring: a run-log table tracks row counts, rejected records, status and duration.
 Automation: scheduled with Databricks Jobs, including retries and failure alerts.
+
+
+2. Problem Statement
+
+Raw trip data arrives continuously and is messy: it contains duplicate records, null values, invalid timestamps, negative fares and inconsistent types. Analysts cannot trust or efficiently query it in that form, and reprocessing the entire dataset on every run is slow and wasteful.
+
+This project solves that by building a pipeline that:
+
+Preserves raw data for auditing and replay (Bronze).
+Cleans, validates and standardizes it (Silver).
+Produces analytics-ready datasets for business questions (Gold).
+Processes only new data, runs automatically, and reports on its own health.
