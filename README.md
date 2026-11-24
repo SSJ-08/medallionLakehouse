@@ -25,6 +25,9 @@ Cleans, validates and standardizes it (Silver).
 Produces analytics-ready datasets for business questions (Gold).
 Processes only new data, runs automatically, and reports on its own health.
 
+3. **Architecture Diagram**
+
+
 4. **Technology Stack**
 Area	Technology
 Platform	Databricks (Unity Catalog, Volumes, Jobs/Workflows)
