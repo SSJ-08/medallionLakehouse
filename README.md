@@ -105,3 +105,17 @@ Run the notebooks in order, or trigger the Job:
 Step 6: Simulate new data and schedule
 Upload the next month's file to yellow/ and rerun. Only the new file should be processed.
 Create a Databricks Job with the three notebooks as dependent tasks, then add a schedule, retries and failure notifications.
+
+7. **Repository Structure**
+├── notebooks/
+│   ├── 01_bronze_ingestion.py
+│   ├── 02_silver_transformation.py
+│   └── 03_gold_aggregations.py
+├── sql/                  # DDL and queries
+├── docs/                 # architecture diagram, screenshots
+└── README.md
+
+8. **Future Improvements**
+Migrate to Lakeflow Declarative Pipelines (formerly Delta Live Tables)
+Add a dashboard on the Gold tables
+Add automated tests for the data quality rules
