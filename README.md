@@ -65,3 +65,43 @@ Automation and monitoring
 A Databricks Job chains Bronze → Silver → Gold as tasks, with a schedule, retries and failure alerts.
 Each run writes to pipeline_run_log: layer, rows read, rows written, rows rejected, duration and status.
 Quality thresholds (for example, rejection rate) can fail a run.
+
+
+6. **Setup Instructions**
+Prerequisites
+A Databricks workspace 
+A GitHub account
+Python 3.x (only needed locally for downloading the data)
+
+Step 1: Clone the repository
+bash
+git clone https://github.com/<your-username>/<repo-name>.git
+
+In Databricks, add the repo under Workspace → Repos / Git folders to sync the notebooks.
+
+Step 2: Create the catalog, schemas and Volume
+sql
+CREATE CATALOG IF NOT EXISTS taxi;
+CREATE SCHEMA IF NOT EXISTS taxi.raw;
+CREATE SCHEMA IF NOT EXISTS taxi.bronze;
+CREATE SCHEMA IF NOT EXISTS taxi.silver;
+CREATE SCHEMA IF NOT EXISTS taxi.gold;
+CREATE SCHEMA IF NOT EXISTS taxi.monitoring;
+CREATE VOLUME IF NOT EXISTS taxi.raw.landing;
+
+Step 3: Download the data
+Go to the NYC TLC Trip Record Data page.
+Download several consecutive months of Yellow Taxi Parquet files from the same year, plus the Taxi Zone Lookup CSV.
+Step 4: Upload to the landing Volume
+/Volumes/taxi/raw/landing/yellow/      # monthly trip files (upload one month first)
+/Volumes/taxi/raw/landing/reference/   # taxi_zone_lookup.csv
+Step 5: Run the pipeline
+
+Run the notebooks in order, or trigger the Job:
+
+01_bronze_ingestion
+02_silver_transformation
+03_gold_aggregations
+Step 6: Simulate new data and schedule
+Upload the next month's file to yellow/ and rerun. Only the new file should be processed.
+Create a Databricks Job with the three notebooks as dependent tasks, then add a schedule, retries and failure notifications.
