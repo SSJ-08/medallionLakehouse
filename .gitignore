@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.venv/
+
+# Secrets and credentials
+.env
+*.pem
+*token*
+
+# Data files (data lives in the Databricks Volume, not Git)
+*.parquet
+*.csv
+*.zip
+
+# OS / editor
+.DS_Store
+.vscode/
